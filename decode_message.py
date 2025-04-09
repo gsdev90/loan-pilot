@@ -1,3 +1,4 @@
+# These all are basic function for python
 import requests
 
 def retrieve_data(url):
