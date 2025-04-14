@@ -36,7 +36,8 @@ export default function LoanList() {
                             <TableRow>
                                 <TableCell><strong>ID</strong></TableCell>
                                 <TableCell><strong>Name</strong></TableCell>
-                                <TableCell><strong>Type</strong></TableCell>
+                                <TableCell><strong>Phone</strong></TableCell>
+                                <TableCell><strong>Email</strong></TableCell>
                                 <TableCell><strong>Amount</strong></TableCell>
                                 <TableCell><strong>Purpose</strong></TableCell>
                                 <TableCell><strong>Status</strong></TableCell>
@@ -44,12 +45,15 @@ export default function LoanList() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
+                            {/* {{ loans }} */}
                             {loans.map((loan) => (
                                 <TableRow key={loan.id}>
                                     <TableCell>{loan.id}</TableCell>
-                                    <TableCell>{loan.applicant_name}</TableCell>
-                                    <TableCell>{loan.applicant_type}</TableCell>
-                                    <TableCell>${loan.loan_amount}</TableCell>
+                                    <TableCell>{loan.first_name} {loan.last_name}</TableCell>
+                                    {/* <TableCell>{loan.applicant_type}</TableCell> */}
+                                    <TableCell>{loan.phone}</TableCell>
+                                    <TableCell>{loan.email}</TableCell>
+                                    <TableCell>${loan.requested_amount}</TableCell>
                                     <TableCell>{loan.loan_purpose}</TableCell>
                                     <TableCell>
                                         <Chip

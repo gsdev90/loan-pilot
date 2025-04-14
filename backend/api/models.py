@@ -1,18 +1,45 @@
+# models.py (Django backend)
 from django.db import models
 
 class LoanApplication(models.Model):
-    APPLICANT_TYPES = [
-        ('IND', 'Individual'),
-        ('BUS', 'Business'),
-    ]
-    
-    applicant_name = models.CharField(max_length=100)
-    applicant_type = models.CharField(max_length=3, choices=APPLICANT_TYPES)
-    loan_amount = models.DecimalField(max_digits=12, decimal_places=2)
-    loan_purpose = models.TextField()
-    status = models.CharField(max_length=20, default='Pending')
+    requested_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    loan_purpose = models.CharField(max_length=255, default='')
+
+    title = models.CharField(max_length=10, default='Mr')
+    first_name = models.CharField(max_length=100, default='')
+    middle_name = models.CharField(max_length=100, blank=True, null=True)
+    last_name = models.CharField(max_length=100, default='')
+    dob = models.DateField(default='2000-01-01')
+    email = models.EmailField(default='example@example.com')
+    phone = models.CharField(max_length=20, default='')
+    marital_status = models.CharField(max_length=50, blank=True, default='')
+
+    residential_status = models.CharField(max_length=100, default='')
+    residency_status = models.CharField(max_length=100, default='')
+    unit_number = models.CharField(max_length=10, blank=True, default='')
+    street_number = models.CharField(max_length=10, default='')
+    street_name = models.CharField(max_length=100, default='')
+    street_type = models.CharField(max_length=50, default='')
+    alley = models.CharField(max_length=100, blank=True, default='')
+    suburb = models.CharField(max_length=100, default='')
+    state = models.CharField(max_length=50, default='')
+    postcode = models.CharField(max_length=10, default='')
+
+    referral_source = models.CharField(max_length=255, blank=True, default='')
+    employment_status = models.CharField(max_length=100, default='')
+    employment_years = models.IntegerField(default=0)
+    employment_months = models.IntegerField(default=0)
+    net_income = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    monthly_expenses = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    income_frequency = models.CharField(max_length=50, default='')
+    next_pay_day = models.DateField(default='2000-01-01')
+
+    receives_govt_benefits = models.BooleanField(default=False)
+    recent_short_term_loans = models.BooleanField(default=False)
+    consent_lead_gen = models.BooleanField(default=False)
+    agree_terms = models.BooleanField(default=False)
+    want_offers = models.BooleanField(default=False)
+
+    status = models.CharField(max_length=50, default='not approved')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"{self.applicant_name} - {self.loan_amount}"
