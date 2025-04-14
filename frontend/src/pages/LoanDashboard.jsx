@@ -1,103 +1,64 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-    Button,
-    TextField,
-    Select,
-    MenuItem,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
     Typography,
     Container,
-    Box,
-    InputLabel,
-    FormControl
+    Chip
 } from '@mui/material';
 import axios from 'axios';
 
-export default function LoanApplication() {
-    const [formData, setFormData] = useState({
-        applicantName: '',
-        applicantType: 'IND',
-        loanAmount: '',
-        loanPurpose: ''
-    });
+export default function LoanDashboard() {
+    const [loans, setLoans] = useState([]);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }));
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:8000/api/loans/', formData);
-            alert('Application submitted successfully!');
-        } catch (error) {
-            console.error('Error submitting application:', error);
-            alert('Failed to submit application. Check console for details.');
-        }
-    };
+    useEffect(() => {
+        axios.get('http://localhost:8000/api/loans/')
+            .then((res) => setLoans(res.data))
+            .catch((err) => console.error('Error fetching loans:', err));
+    }, []);
 
     return (
-        <Container maxWidth="sm">
-            <Typography variant="h4" gutterBottom>
-                Loan Application
-            </Typography>
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
-
-                <TextField
-                    fullWidth
-                    label="Applicant Name"
-                    name="applicantName"
-                    value={formData.applicantName}
-                    onChange={handleChange}
-                    margin="normal"
-                    required
-                />
-
-                <FormControl fullWidth margin="normal">
-                    <InputLabel id="applicant-type-label">Applicant Type</InputLabel>
-                    <Select
-                        labelId="applicant-type-label"
-                        name="applicantType"
-                        value={formData.applicantType}
-                        label="Applicant Type"
-                        onChange={handleChange}
-                    >
-                        <MenuItem value="IND">Individual</MenuItem>
-                        <MenuItem value="BUS">Business</MenuItem>
-                    </Select>
-                </FormControl>
-
-                <TextField
-                    fullWidth
-                    label="Loan Amount"
-                    name="loanAmount"
-                    type="number"
-                    value={formData.loanAmount}
-                    onChange={handleChange}
-                    margin="normal"
-                    required
-                />
-
-                <TextField
-                    fullWidth
-                    label="Loan Purpose"
-                    name="loanPurpose"
-                    value={formData.loanPurpose}
-                    onChange={handleChange}
-                    margin="normal"
-                    required
-                />
-
-                <Box textAlign="center" mt={3}>
-                    <Button type="submit" variant="contained" color="primary">
-                        Submit Application
-                    </Button>
-                </Box>
-
-            </Box>
+        <Container maxWidth="lg">
+            <Typography variant="h4" gutterBottom>Loan Applications</Typography>
+            <TableContainer component={Paper} sx={{ mt: 2 }}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell><strong>ID</strong></TableCell>
+                            <TableCell><strong>Name</strong></TableCell>
+                            <TableCell><strong>Type</strong></TableCell>
+                            <TableCell><strong>Amount</strong></TableCell>
+                            <TableCell><strong>Purpose</strong></TableCell>
+                            <TableCell><strong>Status</strong></TableCell>
+                            <TableCell><strong>Submitted</strong></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {loans.map((loan) => (
+                            <TableRow key={loan.id}>
+                                <TableCell>{loan.id}</TableCell>
+                                <TableCell>{loan.applicant_name}</TableCell>
+                                <TableCell>{loan.applicant_type}</TableCell>
+                                <TableCell>${loan.loan_amount}</TableCell>
+                                <TableCell>{loan.loan_purpose}</TableCell>
+                                <TableCell>
+                                    <Chip
+                                        label={loan.status}
+                                        color={loan.status === 'approved' ? 'success' : 'warning'}
+                                        variant="outlined"
+                                    />
+                                </TableCell>
+                                <TableCell>{new Date(loan.created_at).toLocaleString()}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </Container>
     );
 }
