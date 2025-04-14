@@ -14,3 +14,17 @@ function App() {
 }
 
 export default App;
+
+
+// import React from 'react';
+// import LoanDashboard from './pages/LoanDashboard'; // Adjust the path if needed
+
+// function App() {
+//   return (
+//     <div>
+//       <LoanDashboard />
+//     </div>
+//   );
+// }
+
+// export default App;
