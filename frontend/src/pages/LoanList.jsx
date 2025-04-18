@@ -38,6 +38,7 @@ export default function LoanList() {
                                 <TableCell><strong>Name</strong></TableCell>
                                 <TableCell><strong>Phone</strong></TableCell>
                                 <TableCell><strong>Email</strong></TableCell>
+                                <TableCell><strong>State</strong></TableCell>
                                 <TableCell><strong>Amount</strong></TableCell>
                                 <TableCell><strong>Purpose</strong></TableCell>
                                 <TableCell><strong>Status</strong></TableCell>
@@ -53,6 +54,7 @@ export default function LoanList() {
                                     {/* <TableCell>{loan.applicant_type}</TableCell> */}
                                     <TableCell>{loan.phone}</TableCell>
                                     <TableCell>{loan.email}</TableCell>
+                                    <TableCell>{loan.state}</TableCell>
                                     <TableCell>${loan.requested_amount}</TableCell>
                                     <TableCell>{loan.loan_purpose}</TableCell>
                                     <TableCell>
