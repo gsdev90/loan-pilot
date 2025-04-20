@@ -62,3 +62,6 @@ export default function LoanDashboard() {
         </Container>
     );
 }
+
+
+// we will get new model soon
