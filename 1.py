@@ -12,3 +12,9 @@ print(result)  # Output: 25
 
 # https://sqliteviewer.app/     // this is online tool to open sqlite file
 #https://www.programiz.com/javascript/online-compiler/   // this is online tool for python
+
+#python manage.py makemigrations  // to make migrations
+# python manage.py migrate        // to migrate
+# python manage.py runserver      // to run server
+# source venv/bin/activate        // to open virtual environment
+ 

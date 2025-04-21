@@ -1,150 +1,211 @@
-// src/pages/LoanApplication.jsx
 import React, { useState } from 'react';
-import {
-    Button,
-    TextField,
-    Select,
-    MenuItem,
-    Typography,
-    Container,
-    Box,
-    InputLabel,
-    FormControl,
-    FormGroup,
-    FormControlLabel,
-    Checkbox,
-    Grid
-} from '@mui/material';
+import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
-export default function LoanApplication() {
-    const [formData, setFormData] = useState({
-        requested_amount: '',
-        loan_purpose: '',
-        title: '',
-        first_name: '',
-        middle_name: '',
-        last_name: '',
-        dob: '',
-        email: '',
-        phone: '',
-        marital_status: '',
-        residential_status: '',
-        residency_status: '',
-        unit_number: '',
-        street_number: '',
-        street_name: '',
-        street_type: '',
-        alley: '',
-        suburb: '',
-        state: '',
-        postcode: '',
-        referral_source: '',
-        employment_status: '',
-        employment_years: '',
-        employment_months: '',
-        net_income: '',
-        monthly_expenses: '',
-        income_frequency: '',
-        next_pay_day: '',
-        receives_govt_benefits: false,
-        recent_short_term_loans: false,
-        consent_lead_gen: false,
-        agree_terms: false,
-        want_offers: false
-    });
+const LoanApplicationForm = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [step, setStep] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
 
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: type === 'checkbox' ? checked : value
-        }));
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const onSubmit = async (data) => {
+        setLoading(true);
         try {
-            await axios.post('http://localhost:8000/api/loans/', formData);
-            alert('Application submitted successfully!');
+            const applicationData = {
+                customer: {
+                    title: data.title,
+                    first_name: data.first_name,
+                    middle_name: data.middle_name,
+                    last_name: data.last_name,
+                    dob: data.dob,
+                    email: data.email,
+                    phone: data.phone,
+                    marital_status: data.marital_status,
+
+                    address: {
+                        residential_status: data.residential_status,
+                        residency_status: data.residency_status,
+                        unit_number: data.unit_number,
+                        street_number: data.street_number,
+                        street_name: data.street_name,
+                        street_type: data.street_type,
+                        alley: data.alley,
+                        suburb: data.suburb,
+                        state: data.state,
+                        postcode: data.postcode,
+                    },
+
+                    employment: {
+                        employment_status: data.employment_status,
+                        employment_years: data.employment_years,
+                        employment_months: data.employment_months,
+                        net_income: data.net_income,
+                        monthly_expenses: data.monthly_expenses,
+                        income_frequency: data.income_frequency,
+                        next_pay_day: data.next_pay_day,
+                    },
+
+                    consent: {
+                        receives_govt_benefits: data.receives_govt_benefits,
+                        recent_short_term_loans: data.recent_short_term_loans,
+                        consent_lead_gen: data.consent_lead_gen,
+                        agree_terms: data.agree_terms,
+                        want_offers: data.want_offers,
+                    }
+                },
+
+                requested_amount: data.requested_amount,
+                loan_purpose: data.loan_purpose,
+                referral_source: data.referral_source,
+            };
+            // console.log("Application Data Being Sent:", JSON.stringify(applicationData, null, 2)); // To test Data structure
+            await axios.post('http://localhost:8000/api/loan-applications/', applicationData);
+            setSuccess(true);
         } catch (error) {
-            console.error('Submission error:', error.response?.data || error.message);
-            alert('Submission failed. Check console for details.');
+            console.error("Full error:", error.response?.data || error.message);
+            alert("Submission failed. See console for details.");
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <Container maxWidth="md">
-            <Typography variant="h4" gutterBottom>Loan Application</Typography>
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
-                <Typography variant="h6">Loan Details</Typography>
-                <TextField name="requested_amount" label="Requested Amount" fullWidth margin="normal" onChange={handleChange} />
-                <TextField name="loan_purpose" label="Loan Reason" fullWidth margin="normal" onChange={handleChange} />
+        <form onSubmit={handleSubmit(onSubmit)}>
+            {/* Step 1: Personal Information */}
+            {step === 1 && (
+                <div>
+                    <h2>Personal Information</h2>
+                    <select {...register("title", { required: true })}>
+                        <option value="">Select Title</option>
+                        <option value="Mr">Mr</option>
+                        <option value="Mrs">Mrs</option>
+                        <option value="Ms">Ms</option>
+                        <option value="Dr">Dr</option>
+                    </select>
 
-                <Typography variant="h6" mt={3}>Personal Details</Typography>
-                <FormControl fullWidth margin="normal">
-                    <InputLabel>Title</InputLabel>
-                    <Select name="title" value={formData.title} onChange={handleChange}>
-                        <MenuItem value="Mr">Mr</MenuItem>
-                        <MenuItem value="Ms">Ms</MenuItem>
-                        <MenuItem value="Mrs">Mrs</MenuItem>
-                        <MenuItem value="Dr">Dr</MenuItem>
-                    </Select>
-                </FormControl>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}><TextField name="first_name" label="First Name" fullWidth onChange={handleChange} /></Grid>
-                    <Grid item xs={12} sm={6}><TextField name="middle_name" label="Middle Name" fullWidth onChange={handleChange} /></Grid>
-                    <Grid item xs={12} sm={6}><TextField name="last_name" label="Last Name" fullWidth onChange={handleChange} /></Grid>
-                    <Grid item xs={12} sm={6}><TextField name="dob" label="Date of Birth" type="date" fullWidth InputLabelProps={{ shrink: true }} onChange={handleChange} /></Grid>
-                </Grid>
-                <TextField name="email" label="Email Address" fullWidth margin="normal" onChange={handleChange} />
+                    <input {...register("first_name", { required: true })} placeholder="First Name" />
+                    <input {...register("middle_name")} placeholder="Middle Name" />
+                    <input {...register("last_name", { required: true })} placeholder="Last Name" />
+                    <input {...register("dob", { required: true })} type="date" placeholder="Date of Birth" />
+                    <input {...register("email", { required: true })} type="email" placeholder="Email" />
+                    <input {...register("phone", { required: true })} placeholder="Phone" />
+                    <select {...register("marital_status")}>
+                        <option value="">Marital Status</option>
+                        <option value="single">Single</option>
+                        <option value="married">Married</option>
+                        <option value="divorced">Divorced</option>
+                        <option value="widowed">Widowed</option>
+                    </select>
 
-                <Typography variant="h6" mt={3}>Contact Details</Typography>
-                <TextField name="phone" label="Mobile Phone" fullWidth margin="normal" onChange={handleChange} />
-                <TextField name="residential_status" label="Residential Status" fullWidth margin="normal" onChange={handleChange} />
-                <TextField name="residency_status" label="Residency Status" fullWidth margin="normal" onChange={handleChange} />
+                    <button type="button" onClick={() => setStep(2)}>Next</button>
+                </div>
+            )}
 
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}><TextField name="unit_number" label="Unit #" fullWidth onChange={handleChange} /></Grid>
-                    <Grid item xs={12} sm={6}><TextField name="street_number" label="Street #" fullWidth onChange={handleChange} /></Grid>
-                    <Grid item xs={12} sm={6}><TextField name="street_name" label="Street Name" fullWidth onChange={handleChange} /></Grid>
-                    <Grid item xs={12} sm={6}><TextField name="street_type" label="Street Type" fullWidth onChange={handleChange} /></Grid>
-                    <Grid item xs={12}><TextField name="alley" label="Alley" fullWidth onChange={handleChange} /></Grid>
-                </Grid>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}><TextField name="suburb" label="Suburb" fullWidth onChange={handleChange} /></Grid>
-                    <Grid item xs={12} sm={3}><TextField name="state" label="State" fullWidth onChange={handleChange} /></Grid>
-                    <Grid item xs={12} sm={3}><TextField name="postcode" label="Post Code" fullWidth onChange={handleChange} /></Grid>
-                </Grid>
-                <TextField name="referral_source" label="How did you find out about us?" fullWidth margin="normal" onChange={handleChange} />
+            {/* Step 2: Address */}
+            {step === 2 && (
+                <div>
+                    <h2>Address Information</h2>
+                    <select {...register("residential_status")}>
+                        <option value="">Residential Status</option>
+                        <option value="own">Own</option>
+                        <option value="rent">Rent</option>
+                        <option value="board">Board</option>
+                        <option value="live_with_family">Live with Family</option>
+                    </select>
+                    <input {...register("residency_status")} placeholder="Residency Status" />
+                    <input {...register("unit_number")} placeholder="Unit #" />
+                    <input {...register("street_number")} placeholder="Street #" />
+                    <input {...register("street_name")} placeholder="Street Name" />
+                    <input {...register("street_type")} placeholder="Street Type" />
+                    <input {...register("alley")} placeholder="Alley (optional)" />
+                    <input {...register("suburb")} placeholder="Suburb" />
+                    <input {...register("state")} placeholder="State" />
+                    <input {...register("postcode")} placeholder="Postcode" />
+                    <button type="button" onClick={() => setStep(1)}>Back</button>
+                    <button type="button" onClick={() => setStep(3)}>Next</button>
+                </div>
+            )}
 
-                <Typography variant="h6" mt={3}>Additional Information</Typography>
-                <TextField name="employment_status" label="Employment Status" fullWidth margin="normal" onChange={handleChange} />
-                <Grid container spacing={2}>
-                    <Grid item xs={6}><TextField name="employment_years" label="Total Years Employed" fullWidth onChange={handleChange} /></Grid>
-                    <Grid item xs={6}><TextField name="employment_months" label="Total Months Employed" fullWidth onChange={handleChange} /></Grid>
-                </Grid>
-                <Grid container spacing={2}>
-                    <Grid item xs={6}><TextField name="net_income" label="Net Income" fullWidth onChange={handleChange} /></Grid>
-                    <Grid item xs={6}><TextField name="monthly_expenses" label="Monthly Expenses" fullWidth onChange={handleChange} /></Grid>
-                </Grid>
-                <TextField name="income_frequency" label="Income Frequency" fullWidth margin="normal" onChange={handleChange} />
-                <TextField name="next_pay_day" label="Next Pay Day" type="date" fullWidth margin="normal" InputLabelProps={{ shrink: true }} onChange={handleChange} />
+            {/* Step 3: Employment */}
+            {step === 3 && (
+                <div>
+                    <h2>Employment Information</h2>
+                    <select {...register("employment_status")}>
+                        <option value="">Employment Status</option>
+                        <option value="full_time">Full Time</option>
+                        <option value="part_time">Part Time</option>
+                        <option value="casual">Casual</option>
+                        <option value="self_employed">Self Employed</option>
+                        <option value="unemployed">Unemployed</option>
+                    </select>
+                    <input {...register("employment_years")} placeholder="Years Employed" type="number" />
+                    <input {...register("employment_months")} placeholder="Months Employed" type="number" />
+                    <input {...register("net_income")} placeholder="Net Income" type="number" />
+                    <input {...register("monthly_expenses")} placeholder="Monthly Expenses" type="number" />
+                    <select {...register("income_frequency")}>
+                        <option value="">Income Frequency</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="fortnightly">Fortnightly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="annually">Annually</option>
+                    </select>
+                    <input {...register("next_pay_day")} type="date" placeholder="Next Pay Day" />
+                    <button type="button" onClick={() => setStep(2)}>Back</button>
+                    <button type="button" onClick={() => setStep(4)}>Next</button>
+                </div>
+            )}
 
-                <FormGroup>
-                    <FormControlLabel control={<Checkbox name="receives_govt_benefits" checked={formData.receives_govt_benefits} onChange={handleChange} />} label="Receives Government Benefits" />
-                    <FormControlLabel control={<Checkbox name="recent_short_term_loans" checked={formData.recent_short_term_loans} onChange={handleChange} />} label="Had 2 or More Short Term Loans in Last 90 Days" />
-                    <FormControlLabel control={<Checkbox name="consent_lead_gen" checked={formData.consent_lead_gen} onChange={handleChange} />} label="I consent for my info to be used for lead generation" />
-                    <FormControlLabel control={<Checkbox name="agree_terms" checked={formData.agree_terms} onChange={handleChange} />} label="I agree to Terms and Privacy Policy" />
-                    <FormControlLabel control={<Checkbox name="want_offers" checked={formData.want_offers} onChange={handleChange} />} label="I want to receive rewards and offers" />
-                </FormGroup>
+            {/* Step 4: Loan + Consent */}
+            {step === 4 && (
+                <div>
+                    <h2>Loan Details & Consent</h2>
+                    <input {...register("requested_amount")} placeholder="Requested Amount" type="number" />
+                    <select {...register("loan_purpose")}>
+                        <option value="">Loan Purpose</option>
+                        <option value="debt_consolidation">Debt Consolidation</option>
+                        <option value="home_improvement">Home Improvement</option>
+                        <option value="medical">Medical</option>
+                        <option value="education">Education</option>
+                        <option value="vehicle">Vehicle</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <input {...register("referral_source")} placeholder="How did you hear about us?" />
 
-                <Box textAlign="center" mt={3}>
-                    <Button type="submit" variant="contained" color="primary">
-                        Submit Application
-                    </Button>
-                </Box>
-            </Box>
-        </Container>
+                    <label>
+                        <input type="checkbox" {...register("receives_govt_benefits")} />
+                        Receiving government benefits
+                    </label>
+                    <label>
+                        <input type="checkbox" {...register("recent_short_term_loans")} />
+                        Taken short term loans recently
+                    </label>
+                    <label>
+                        <input type="checkbox" {...register("consent_lead_gen")} />
+                        Consent for lead generation
+                    </label>
+                    <label>
+                        <input type="checkbox" {...register("agree_terms")} />
+                        I agree to terms
+                    </label>
+                    <label>
+                        <input type="checkbox" {...register("want_offers")} />
+                        I want promotional offers
+                    </label>
+
+                    <button type="button" onClick={() => setStep(3)}>Back</button>
+                    <button type="submit" disabled={loading}>
+                        {loading ? 'Submitting...' : 'Submit Application'}
+                    </button>
+                </div>
+            )}
+
+            {success && (
+                <div className="success-message">
+                    <h3>Application Submitted Successfully!</h3>
+                </div>
+            )}
+        </form>
     );
-}
+};
+
+export default LoanApplicationForm;

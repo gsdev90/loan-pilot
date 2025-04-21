@@ -1,76 +1,90 @@
 import React, { useEffect, useState } from 'react';
-import {
-    Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-    Paper, Typography, Container, Chip, CircularProgress
-} from '@mui/material';
 import axios from 'axios';
 
-export default function LoanList() {
+const LoanList = () => {
     const [loans, setLoans] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/loans/')
-            .then((res) => {
-                setLoans(res.data);
+        const fetchLoans = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/api/loan-applications/');
+                setLoans(response.data);
+            } catch (error) {
+                console.error('Error fetching loan applications:', error);
+            } finally {
                 setLoading(false);
-            })
-            .catch((err) => {
-                console.error('Failed to fetch loan list:', err);
-                setLoading(false);
-            });
+            }
+        };
+
+        fetchLoans();
     }, []);
 
-    return (
-        <Container maxWidth="lg" sx={{ mt: 4 }}>
-            <Typography variant="h4" gutterBottom>
-                All Loan Applications
-            </Typography>
+    const viewDetails = (id) => {
+        alert(`View more details for loan #${id}`);
+        // Or route to /loans/:id using React Router
+    };
 
-            {loading ? (
-                <CircularProgress />
-            ) : (
-                <TableContainer component={Paper}>
-                    <Table>
-                        <TableHead sx={{ backgroundColor: '#f5f5f5' }}>
-                            <TableRow>
-                                <TableCell><strong>ID</strong></TableCell>
-                                <TableCell><strong>Name</strong></TableCell>
-                                <TableCell><strong>Phone</strong></TableCell>
-                                <TableCell><strong>Email</strong></TableCell>
-                                <TableCell><strong>State</strong></TableCell>
-                                <TableCell><strong>Amount</strong></TableCell>
-                                <TableCell><strong>Purpose</strong></TableCell>
-                                <TableCell><strong>Status</strong></TableCell>
-                                <TableCell><strong>Submitted</strong></TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {/* {{ loans }} */}
-                            {loans.map((loan) => (
-                                <TableRow key={loan.id}>
-                                    <TableCell>{loan.id}</TableCell>
-                                    <TableCell>{loan.first_name} {loan.last_name}</TableCell>
-                                    {/* <TableCell>{loan.applicant_type}</TableCell> */}
-                                    <TableCell>{loan.phone}</TableCell>
-                                    <TableCell>{loan.email}</TableCell>
-                                    <TableCell>{loan.state}</TableCell>
-                                    <TableCell>${loan.requested_amount}</TableCell>
-                                    <TableCell>{loan.loan_purpose}</TableCell>
-                                    <TableCell>
-                                        <Chip
-                                            label={loan.status}
-                                            color={loan.status === 'approved' ? 'success' : 'warning'}
-                                            variant="outlined"
-                                        />
-                                    </TableCell>
-                                    <TableCell>{new Date(loan.created_at).toLocaleString()}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            )}
-        </Container>
+    if (loading) return <p>Loading loan applications...</p>;
+
+    return (
+        <div className="loan-list">
+            <h2>All Loan Applications</h2>
+            <table border="1" cellPadding="8" cellSpacing="0">
+                <thead>
+                    <tr>
+                        <th>Application ID</th>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>State</th>
+                        <th>Amount</th>
+                        <th>Purpose</th>
+                        <th>Status</th>
+                        <th>Submitted At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {loans.map((loan) => (
+                        <tr key={loan.id}>
+                            <td>{loan.id}</td>
+                            <td>
+                                {loan.customer?.first_name} {loan.customer?.last_name}
+                            </td>
+                            <td>{loan.customer?.phone}</td>
+                            <td>{loan.customer?.email}</td>
+                            <td>{loan.customer?.address?.state || 'N/A'}</td>
+                            <td>${Number(loan.requested_amount).toFixed(2)}</td>
+                            <td>{loan.loan_purpose.replace('_', ' ')}</td>
+                            <td>
+                                <span
+                                    className={`status-badge ${loan.status.toLowerCase()}`}
+                                    style={{
+                                        padding: '4px 8px',
+                                        borderRadius: '4px',
+                                        color: 'white',
+                                        backgroundColor:
+                                            loan.status === 'approved'
+                                                ? 'green'
+                                                : loan.status === 'rejected'
+                                                    ? 'red'
+                                                    : 'orange',
+                                    }}
+                                >
+                                    {loan.status}
+                                </span>
+                            </td>
+                            <td>{new Date(loan.created_at).toLocaleString()}</td>
+                            <td>
+                                <button onClick={() => viewDetails(loan.id)}>View</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
-}
+};
+
+export default LoanList;
