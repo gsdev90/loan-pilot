@@ -1,0 +1,153 @@
+/* LoanApplication.css */
+
+.loan-form-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.form-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.loan-form fieldset {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.loan-form legend {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0 10px;
+    color: #444;
+}
+
+.loan-form .form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.loan-form .form-group input,
+.loan-form .form-group select {
+    width: 100%;
+    padding: 14px 12px 14px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background: none;
+}
+
+.loan-form .form-group label {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background-color: #f9f9f9;
+    padding: 0 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.loan-form .error-message {
+    color: red;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.loan-form input:focus,
+.loan-form select:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 5px rgba(25, 118, 210, 0.5);
+    outline: none;
+}
+
+.loan-form label.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #1976d2;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background-color: #135ba1;
+}
+
+.success-message {
+    text-align: center;
+    margin-top: 20px;
+    color: green;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+@media (max-width: 600px) {
+    .loan-form-container {
+        padding: 15px;
+    }
+
+    .form-title {
+        font-size: 22px;
+    }
+
+    .loan-form input,
+    .loan-form select {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .submit-btn {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .checkbox-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .checkbox-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+
+}
