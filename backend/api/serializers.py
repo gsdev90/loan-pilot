@@ -61,3 +61,39 @@ class LoanApplicationSerializer(serializers.ModelSerializer):
         validated_data.pop('customer', None)
         loan_application = LoanApplication.objects.create(customer=customer, **validated_data)
         return loan_application
+    
+   
+    def update(self, instance, validated_data):
+        customer_data = validated_data.pop('customer', {})
+        address_data = customer_data.pop('address', {})
+        employment_data = customer_data.pop('employment', {})
+        consent_data = customer_data.pop('consent', {})
+
+        # Update Customer
+        for attr, value in customer_data.items():
+            setattr(instance.customer, attr, value)
+        instance.customer.save()
+
+        # Fix these lines 👇 if you are using OneToOneField instead of ForeignKey
+        address = instance.customer.address
+        for attr, value in address_data.items():
+            setattr(address, attr, value)
+        address.save()
+
+        employment = instance.customer.employment
+        for attr, value in employment_data.items():
+            setattr(employment, attr, value)
+        employment.save()
+
+        consent = instance.customer.consent
+        for attr, value in consent_data.items():
+            setattr(consent, attr, value)
+        consent.save()
+
+        # Update LoanApplication
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        return instance
+

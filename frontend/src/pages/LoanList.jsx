@@ -45,6 +45,9 @@ const LoanList = () => {
                     <tr>
                         <th>ID</th>
                         <th>Customer</th>
+                        <th>Phone No</th>
+                        <th>Email</th>
+                        <th>Address</th>
                         <th>Requested Amount</th>
                         <th>Purpose</th>
                         <th>Status</th>
@@ -56,7 +59,10 @@ const LoanList = () => {
                     {loans.map((loan) => (
                         <tr key={loan.id}>
                             <td>{loan.id}</td>
-                            <td>{loan.customer?.first_name} {loan.customer?.last_name}</td>
+                            <td>{loan.customer?.first_name} {loan.customer?.middle_name} {loan.customer?.last_name}</td>
+                            <td>{loan.customer?.phone}</td>
+                            <td>{loan.customer?.email}</td>
+                            <td>{loan.customer?.address.state}</td>
                             <td>${parseFloat(loan.requested_amount).toFixed(2)}</td>
                             <td>{loan.loan_purpose}</td>
                             <td>{loan.status}</td>

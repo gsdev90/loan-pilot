@@ -77,26 +77,40 @@ const LoanApplicationForm = () => {
                 <fieldset>
                     <legend>Personal Information</legend>
                     <div className="form-group">
-                        <select {...register("title", { required: true })}>
+                        <select {...register("title", { required: "Title is required" })}>
                             <option value="">Select Title</option>
                             <option value="Mr">Mr</option>
                             <option value="Mrs">Mrs</option>
                             <option value="Ms">Ms</option>
                             <option value="Dr">Dr</option>
                         </select>
-                        <input {...register("first_name", { required: true })} placeholder="First Name" />
+                        {errors.title && <p className="error-message">{errors.title.message}</p>}
+
+                        <input {...register("first_name", { required: "First Name is required" })} placeholder="First Name" />
+                        {errors.first_name && <p className="error-message">{errors.first_name.message}</p>}
+
                         <input {...register("middle_name")} placeholder="Middle Name" />
-                        <input {...register("last_name", { required: true })} placeholder="Last Name" />
-                        <input {...register("dob", { required: true })} type="date" placeholder="Date of Birth" />
-                        <input {...register("email", { required: true })} type="email" placeholder="Email" />
-                        <input {...register("phone", { required: true })} placeholder="Phone" />
-                        <select {...register("marital_status")}>
+
+                        <input {...register("last_name", { required: "Last Name is required" })} placeholder="Last Name" />
+                        {errors.last_name && <p className="error-message">{errors.last_name.message}</p>}
+
+                        <input {...register("dob", { required: "Date of Birth is required" })} type="date" placeholder="Date of Birth" />
+                        {errors.dob && <p className="error-message">{errors.dob.message}</p>}
+
+                        <input {...register("email", { required: "Email is required" })} type="email" placeholder="Email" />
+                        {errors.email && <p className="error-message">{errors.email.message}</p>}
+
+                        <input {...register("phone", { required: "Phone number is required" })} placeholder="Phone" />
+                        {errors.phone && <p className="error-message">{errors.phone.message}</p>}
+
+                        <select {...register("marital_status", { required: "Marital Status is required" })}>
                             <option value="">Marital Status</option>
                             <option value="single">Single</option>
                             <option value="married">Married</option>
                             <option value="divorced">Divorced</option>
                             <option value="widowed">Widowed</option>
                         </select>
+                        {errors.marital_status && <p className="error-message">{errors.marital_status.message}</p>}
                     </div>
                 </fieldset>
 

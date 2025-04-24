@@ -25,3 +25,4 @@ yarn-error.log*
 
 backend/api/
 backend/loanpilot/__pycache__
+backend/api/__pycache__/
