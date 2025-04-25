@@ -1,6 +1,7 @@
 # serializers.py
 from rest_framework import serializers
 from .models import Customer, Address, Employment, Consent, LoanApplication
+from .models import Lender
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
@@ -96,4 +97,9 @@ class LoanApplicationSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
+    
+class LenderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lender
+        fields = '__all__'
 

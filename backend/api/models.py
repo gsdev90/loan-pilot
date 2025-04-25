@@ -50,3 +50,18 @@ class LoanApplication(models.Model):
     status = models.CharField(max_length=50, default='not approved')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Lender(models.Model):
+    name = models.CharField(max_length=255)
+    contact_email = models.EmailField()
+    supported_loan_types = models.CharField(max_length=255, help_text="Comma-separated values")
+    min_loan_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    max_loan_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    employment_preferences = models.TextField(help_text="E.g. Accept Centrelink, Full-time only")
+    credit_profile_preferences = models.TextField(help_text="E.g. No defaults, Credit score above 600")
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+def __str__(self):
+    return self.name

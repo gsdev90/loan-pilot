@@ -23,6 +23,10 @@ yarn-debug.log*
 yarn-error.log*
 .vscode/
 
-backend/api/
-backend/loanpilot/__pycache__
-backend/api/__pycache__/
+# backend/api/
+# backend/loanpilot/__pycache__
+# backend/api/__pycache__/
+
+# Ignore all __pycache__ folders and Python compiled files
+__pycache__/
+*.py[cod]

@@ -4,6 +4,8 @@ import LoanDashboard from './pages/LoanDashboard';
 import LoanList from './pages/LoanList';
 import LoanDetail from './pages/LoanDetail';
 import LoanEdit from './pages/LoanEdit';
+import LenderList from './pages/LenderList';
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
         <Route path="/loans" element={<LoanList />} />  {/* 👈 New route */}
         <Route path="/loan-list/:id" element={<LoanDetail />} />
         <Route path="/loan-list/:id/edit" element={<LoanEdit />} />
+        <Route path="/lenders" element={<LenderList />} />
       </Routes>
     </Router>
   );
