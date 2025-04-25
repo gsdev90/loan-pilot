@@ -43,7 +43,7 @@ const LoanEdit = () => {
         try {
             await axios.put(`http://localhost:8000/api/loan-applications/${id}/`, formData);
             alert('Loan updated successfully!');
-            navigate('/loan-list');
+            navigate('/loans');
         } catch (error) {
             console.error('Error updating loan:', error);
             alert('Update failed. See console for details.');
