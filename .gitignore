@@ -30,3 +30,6 @@ yarn-error.log*
 # Ignore all __pycache__ folders and Python compiled files
 __pycache__/
 *.py[cod]
+*$py.class
+
+
