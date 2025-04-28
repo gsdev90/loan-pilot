@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../styles/loanlist.css';
 import axios from 'axios';
 
 const LenderList = () => {
@@ -53,15 +54,36 @@ const LenderList = () => {
                 <button type="submit">Add Lender</button>
             </form>
 
-            <ul>
-                {lenders.map(lender => (
-                    <li key={lender.id}>
-                        <strong>{lender.name}</strong> ({lender.contact_email}) — Loan Types: {lender.supported_loan_types} | Amounts: ${lender.min_loan_amount}–${lender.max_loan_amount}<br />
-                        Employment: {lender.employment_preferences} | Credit: {lender.credit_profile_preferences}
-                        <button onClick={() => handleDelete(lender.id)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
+            <table className="lender-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Contact Email</th>
+                        <th>Loan Types</th>
+                        <th>Loan Amount Range</th>
+                        <th>Employment Preferences</th>
+                        <th>Credit Preferences</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {lenders.map((lender) => (
+                        <tr key={lender.id}>
+                            <td>{lender.name}</td>
+                            <td>{lender.contact_email}</td>
+                            <td>{lender.supported_loan_types}</td>
+                            <td>${lender.min_loan_amount} – ${lender.max_loan_amount}</td>
+                            <td>{lender.employment_preferences}</td>
+                            <td>{lender.credit_profile_preferences}</td>
+                            <td>
+                                <button onClick={() => handleDelete(lender.id)} className="delete-btn">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 };

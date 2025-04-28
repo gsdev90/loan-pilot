@@ -16,7 +16,7 @@ function App() {
         <Route path="/loans" element={<LoanList />} />  {/* 👈 New route */}
         <Route path="/loan-list/:id" element={<LoanDetail />} />
         <Route path="/loan-list/:id/edit" element={<LoanEdit />} />
-        <Route path="/lenders" element={<LenderList />} />
+        <Route path="lenders" element={<LenderList />} />
       </Routes>
     </Router>
   );

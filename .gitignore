@@ -32,4 +32,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Ignore SQLite database
+backend/db.sqlite3
+
+# Ignore frontend package.json
+frontend/package.json
+
+
 
