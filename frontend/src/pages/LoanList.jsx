@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-// import '../styles/loanlist.css';
 import '../styles/main.css';
 
 const LoanList = () => {

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/loanlist.css';
 import axios from 'axios';
 
 const LenderList = () => {
