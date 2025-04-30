@@ -1,5 +1,4 @@
-/* LoanApplication.css */
-
+/* --- Layout Containers --- */
 .loan-form-container {
     max-width: 800px;
     margin: 40px auto;
@@ -17,6 +16,7 @@
     color: #333;
 }
 
+/* --- Form Styles --- */
 .loan-form fieldset {
     border: 1px solid #ddd;
     padding: 20px;
@@ -39,7 +39,7 @@
 .loan-form .form-group input,
 .loan-form .form-group select {
     width: 100%;
-    padding: 14px 12px 14px 12px;
+    padding: 14px 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 16px;
@@ -57,12 +57,6 @@
     color: #555;
 }
 
-.loan-form .error-message {
-    color: red;
-    font-size: 13px;
-    margin-top: 4px;
-}
-
 .loan-form input:focus,
 .loan-form select:focus {
     border-color: #1976d2;
@@ -70,13 +64,10 @@
     outline: none;
 }
 
-.loan-form label.checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    margin-bottom: 10px;
-    color: #333;
+.error-message {
+    color: red;
+    font-size: 13px;
+    margin-top: 4px;
 }
 
 .submit-btn {
@@ -105,6 +96,118 @@
     font-size: 18px;
 }
 
+/* --- Checkbox Styles --- */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* --- Loan List Table --- */
+.loan-list {
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.loan-list h2 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+    background-color: #f8f8f8;
+}
+
+th,
+td {
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+td button {
+    margin-right: 8px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+td button:hover {
+    opacity: 0.9;
+}
+
+td button:nth-child(1) {
+    background-color: #1976d2;
+    color: white;
+}
+
+td button:nth-child(2) {
+    background-color: #f9a825;
+    color: white;
+}
+
+td button:nth-child(3) {
+    background-color: #e53935;
+    color: white;
+}
+
+/* --- Lender Table --- */
+.lender-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.lender-table th,
+.lender-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.lender-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.lender-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.delete-btn {
+    background-color: #e53935;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.delete-btn:hover {
+    background-color: #c62828;
+}
+
+/* --- Responsive Styles --- */
 @media (max-width: 600px) {
     .loan-form-container {
         padding: 15px;
@@ -124,30 +227,4 @@
         font-size: 16px;
         padding: 10px;
     }
-
-    .checkbox-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .checkbox-label {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .checkbox-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .checkbox-label {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-
 }

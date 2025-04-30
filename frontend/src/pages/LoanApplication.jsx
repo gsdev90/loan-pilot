@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import '../styles/loanapplication.css';
+import '../styles/main.css';
 
 const LoanApplicationForm = () => {
     const {
