@@ -1,67 +1,74 @@
-import React, { useEffect, useState } from 'react';
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Paper,
-    Typography,
-    Container,
-    Chip
-} from '@mui/material';
-import axios from 'axios';
+// StaffDashboard.jsx
+import React, { useState } from 'react';
+import '../styles/main.css';
 
-export default function LoanDashboard() {
-    const [loans, setLoans] = useState([]);
+function StaffDashboard() {
+    const [announcements, setAnnouncements] = useState([
+        { id: 1, title: 'Loan System Live!', content: 'LoanPilot backend integration is now active.', date: '2025-04-28' },
+        { id: 2, title: 'Maintenance Notice', content: 'System maintenance scheduled on 2025-05-02.', date: '2025-04-26' },
+    ]);
 
-    useEffect(() => {
-        axios.get('http://localhost:8000/api/loans/')
-            .then((res) => setLoans(res.data))
-            .catch((err) => console.error('Error fetching loans:', err));
-    }, []);
+    const [newAnnouncement, setNewAnnouncement] = useState({
+        title: '',
+        content: '',
+    });
+
+    const handlePost = (e) => {
+        e.preventDefault();
+        if (newAnnouncement.title && newAnnouncement.content) {
+            const newPost = {
+                id: announcements.length + 1,
+                title: newAnnouncement.title,
+                content: newAnnouncement.content,
+                date: new Date().toISOString().split('T')[0],
+            };
+            setAnnouncements([newPost, ...announcements]);
+            setNewAnnouncement({ title: '', content: '' });
+        }
+    };
 
     return (
-        <Container maxWidth="lg">
-            <Typography variant="h4" gutterBottom>Loan Applications</Typography>
-            <TableContainer component={Paper} sx={{ mt: 2 }}>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell><strong>ID</strong></TableCell>
-                            <TableCell><strong>Name</strong></TableCell>
-                            <TableCell><strong>Type</strong></TableCell>
-                            <TableCell><strong>Amount</strong></TableCell>
-                            <TableCell><strong>Purpose</strong></TableCell>
-                            <TableCell><strong>Status</strong></TableCell>
-                            <TableCell><strong>Submitted</strong></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {loans.map((loan) => (
-                            <TableRow key={loan.id}>
-                                <TableCell>{loan.id}</TableCell>
-                                <TableCell>{loan.applicant_name}</TableCell>
-                                <TableCell>{loan.applicant_type}</TableCell>
-                                <TableCell>${loan.loan_amount}</TableCell>
-                                <TableCell>{loan.loan_purpose}</TableCell>
-                                <TableCell>
-                                    <Chip
-                                        label={loan.status}
-                                        color={loan.status === 'approved' ? 'success' : 'warning'}
-                                        variant="outlined"
-                                    />
-                                </TableCell>
-                                <TableCell>{new Date(loan.created_at).toLocaleString()}</TableCell>
-                            </TableRow>
+        <div className="dashboard-container">
+            <h2>Staff Dashboard</h2>
+
+            <section className="announcement-section">
+                <h3>Post Emergency Task or Update</h3>
+                <form onSubmit={handlePost} className="announcement-form">
+                    <input
+                        type="text"
+                        placeholder="Title"
+                        value={newAnnouncement.title}
+                        onChange={(e) => setNewAnnouncement({ ...newAnnouncement, title: e.target.value })}
+                        required
+                    />
+                    <textarea
+                        placeholder="Message"
+                        value={newAnnouncement.content}
+                        onChange={(e) => setNewAnnouncement({ ...newAnnouncement, content: e.target.value })}
+                        required
+                    />
+                    <button type="submit">Post</button>
+                </form>
+            </section>
+
+            <section className="announcement-list">
+                <h3>Shared Updates</h3>
+                {announcements.length === 0 ? (
+                    <p>No updates yet.</p>
+                ) : (
+                    <ul>
+                        {announcements.map((note) => (
+                            <li key={note.id} className="announcement-item">
+                                <h4>{note.title}</h4>
+                                <p>{note.content}</p>
+                                <small>{note.date}</small>
+                            </li>
                         ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </Container>
+                    </ul>
+                )}
+            </section>
+        </div>
     );
 }
 
-
-// we will get new model soon
+export default StaffDashboard;
