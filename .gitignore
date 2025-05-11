@@ -37,6 +37,6 @@ backend/db.sqlite3
 
 # Ignore frontend package.json
 frontend/package.json
-
+1.py
 
 
