@@ -1,0 +1,802 @@
+[
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "auth",
+        "model": "user"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "api",
+        "model": "customer"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "api",
+        "model": "lender"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "api",
+        "model": "consent"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "api",
+        "model": "address"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "api",
+        "model": "employment"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "api",
+        "model": "loanapplication"
+    }
+},
+{
+    "model": "api.customer",
+    "pk": 1,
+    "fields": {
+        "title": "Mr",
+        "first_name": "Gurminder",
+        "middle_name": "singh",
+        "last_name": "Pannu",
+        "dob": "2000-02-09",
+        "email": "guripannu4@gmail.com",
+        "phone": "0431657714",
+        "marital_status": "married",
+        "created_at": "2025-05-06T07:14:41.127Z"
+    }
+},
+{
+    "model": "api.address",
+    "pk": 1,
+    "fields": {
+        "customer": 1,
+        "residential_status": "own",
+        "residency_status": "Comera",
+        "unit_number": "",
+        "street_number": "16",
+        "street_name": "Carpenters dr coomera",
+        "street_type": "Drive",
+        "alley": "",
+        "suburb": "gold coast",
+        "state": "QLD",
+        "postcode": "4209"
+    }
+},
+{
+    "model": "api.employment",
+    "pk": 1,
+    "fields": {
+        "customer": 1,
+        "employment_status": "full_time",
+        "employment_years": 2,
+        "employment_months": 3,
+        "net_income": "60000.00",
+        "monthly_expenses": "200.00",
+        "income_frequency": "weekly",
+        "next_pay_day": "2025-05-07"
+    }
+},
+{
+    "model": "api.consent",
+    "pk": 1,
+    "fields": {
+        "customer": 1,
+        "receives_govt_benefits": true,
+        "recent_short_term_loans": true,
+        "consent_lead_gen": true,
+        "agree_terms": true,
+        "want_offers": true
+    }
+},
+{
+    "model": "api.loanapplication",
+    "pk": 1,
+    "fields": {
+        "customer": 1,
+        "requested_amount": "1000.00",
+        "loan_purpose": "home_improvement",
+        "referral_source": "Seek",
+        "status": "not approved",
+        "created_at": "2025-05-06T07:14:41.177Z",
+        "updated_at": "2025-05-06T07:15:13.372Z"
+    }
+},
+{
+    "model": "api.lender",
+    "pk": 1,
+    "fields": {
+        "name": "Gurminder singh",
+        "contact_email": "gsdev90@gmail.com",
+        "supported_loan_types": "Car",
+        "min_loan_amount": "10000.00",
+        "max_loan_amount": "20000.00",
+        "employment_preferences": "Full-time",
+        "credit_profile_preferences": "Active",
+        "created_at": "2025-05-05T07:10:36.297Z",
+        "updated_at": "2025-05-05T07:10:36.297Z"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view user",
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "codename": "view_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add customer",
+        "content_type": [
+            "api",
+            "customer"
+        ],
+        "codename": "add_customer"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change customer",
+        "content_type": [
+            "api",
+            "customer"
+        ],
+        "codename": "change_customer"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete customer",
+        "content_type": [
+            "api",
+            "customer"
+        ],
+        "codename": "delete_customer"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view customer",
+        "content_type": [
+            "api",
+            "customer"
+        ],
+        "codename": "view_customer"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add lender",
+        "content_type": [
+            "api",
+            "lender"
+        ],
+        "codename": "add_lender"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change lender",
+        "content_type": [
+            "api",
+            "lender"
+        ],
+        "codename": "change_lender"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete lender",
+        "content_type": [
+            "api",
+            "lender"
+        ],
+        "codename": "delete_lender"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view lender",
+        "content_type": [
+            "api",
+            "lender"
+        ],
+        "codename": "view_lender"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add consent",
+        "content_type": [
+            "api",
+            "consent"
+        ],
+        "codename": "add_consent"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change consent",
+        "content_type": [
+            "api",
+            "consent"
+        ],
+        "codename": "change_consent"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete consent",
+        "content_type": [
+            "api",
+            "consent"
+        ],
+        "codename": "delete_consent"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view consent",
+        "content_type": [
+            "api",
+            "consent"
+        ],
+        "codename": "view_consent"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add address",
+        "content_type": [
+            "api",
+            "address"
+        ],
+        "codename": "add_address"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change address",
+        "content_type": [
+            "api",
+            "address"
+        ],
+        "codename": "change_address"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete address",
+        "content_type": [
+            "api",
+            "address"
+        ],
+        "codename": "delete_address"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view address",
+        "content_type": [
+            "api",
+            "address"
+        ],
+        "codename": "view_address"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add employment",
+        "content_type": [
+            "api",
+            "employment"
+        ],
+        "codename": "add_employment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change employment",
+        "content_type": [
+            "api",
+            "employment"
+        ],
+        "codename": "change_employment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete employment",
+        "content_type": [
+            "api",
+            "employment"
+        ],
+        "codename": "delete_employment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view employment",
+        "content_type": [
+            "api",
+            "employment"
+        ],
+        "codename": "view_employment"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add loan application",
+        "content_type": [
+            "api",
+            "loanapplication"
+        ],
+        "codename": "add_loanapplication"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change loan application",
+        "content_type": [
+            "api",
+            "loanapplication"
+        ],
+        "codename": "change_loanapplication"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete loan application",
+        "content_type": [
+            "api",
+            "loanapplication"
+        ],
+        "codename": "delete_loanapplication"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view loan application",
+        "content_type": [
+            "api",
+            "loanapplication"
+        ],
+        "codename": "view_loanapplication"
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$tBZcL7AHWbgBB4u1hElitL$hrmvr99qy1r1vmQPAWzM6Mrm1O9aej4rZcyaiGnQahU=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "garry",
+        "first_name": "",
+        "last_name": "",
+        "email": "gsdev90@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-05-05T07:01:16.176Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$7hbuJsTtvmRPM6GPtMLSMT$5Y7gkGaiZzAiDotjQJbj8MCeFCtdDytfdON2VE50bGs=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "tegman",
+        "first_name": "",
+        "last_name": "",
+        "email": "tegman@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-05-05T07:43:01.960Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$RUfkM3CH71dXcyF1h2s5vF$sa1LNoE6i+7/Qf1ZhwbkA6lyZtnkja9cJ2Hckv/qA4g=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "rehmat",
+        "first_name": "",
+        "last_name": "",
+        "email": "rehmat@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-05-05T08:10:01.754Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$8q1p7oZYqsuTvnyjP3ayMP$JCm4ktbmZyja4RFw7tjawlx46vAJhPRNDGlYEnEmOIw=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "gurminder",
+        "first_name": "",
+        "last_name": "",
+        "email": "gsdev99@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-05-06T03:38:12.991Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$ibJdb0dAOI4DaRg0iHhssO$olmjqorNjqSpujCyUqYw+jJtOf0A4rUa8ScHFSLNRO4=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "sukhveen",
+        "first_name": "",
+        "last_name": "",
+        "email": "sukhveen89@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-05-06T03:49:58.894Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$M67MptPNV4OqO9CG01bX97$q+ljd/vxZFv2SWH4457HJVHJ85wMr/s5MJwQqXlPUgM=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "mytest",
+        "first_name": "",
+        "last_name": "",
+        "email": "test@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-05-11T03:05:23.871Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
